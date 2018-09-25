@@ -95,7 +95,7 @@ View v;
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         rv.setAdapter(adaptador_recycler);
 
-    }
+     }
 
 
 

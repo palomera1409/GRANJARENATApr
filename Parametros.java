@@ -16,6 +16,7 @@ public class Parametros {
 
 
 
+
     public int getId_Cerdos() {
         return Id_Cerdos;
     }

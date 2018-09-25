@@ -30,6 +30,7 @@ class DescripcionCerdo extends AppCompatActivity {
 
     private static Intent crearIntencion(Activity contexto, Parametros parametros)
     {
+
         Intent i = new Intent(contexto,DescripcionCerdo.class);
 
         i.putExtra("Nombre_del_cerdo",parametros.getNombre());

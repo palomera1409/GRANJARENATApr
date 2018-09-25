@@ -17,5 +17,5 @@ public class CompraFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_compra, container, false);
 
 
-    }
+     }
 }

@@ -43,7 +43,7 @@ class adaptador_recycler  extends RecyclerView.Adapter <adaptador_recycler.ViewH
         Parametros parametro = parametros.get(position);
          holder.raza.setText(parametro.getRaza());
 
-    }
+     }
 
     @Override
     public int getItemCount() {

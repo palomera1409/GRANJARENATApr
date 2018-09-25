@@ -7,6 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by Palomera on 13/09/2018.
  */
 
+
 public class ServicioProvedor {
     /*esta  variable va traer si tuviera ya un servicio precargado  y lo ejecutaria.
     private static ServicioContacto service;
