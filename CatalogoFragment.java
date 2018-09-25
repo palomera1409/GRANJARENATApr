@@ -39,10 +39,11 @@ public class CatalogoFragment extends Fragment {
 
 
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        cargar_datos();
+
 
 
 
@@ -61,7 +62,7 @@ public class CatalogoFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
+        cargar_datos();
     }
 
 
@@ -85,12 +86,24 @@ public class CatalogoFragment extends Fragment {
                     //Toast.makeText(getContext(),"si trajo datos",Toast.LENGTH_LONG).show();
                     llenarRecycler();
 
+
+
                 }
                 else
                 {
                     Toast.makeText(getContext(),"no trajo datos",Toast.LENGTH_LONG).show();
                 }
 
+
+            }
+
+            private void llenarRecycler()
+            {
+
+            adaptador_recycler  gr = new adaptador_recycler(getContext(),datos);
+                LinearLayoutManager lln= new LinearLayoutManager(getContext());
+                rv.setLayoutManager(lln);
+                rv.setAdapter(gr);
 
             }
 
@@ -110,16 +123,7 @@ public class CatalogoFragment extends Fragment {
 
 
 
-   public void llenarRecycler()
-    {
-        if (datos!=null) {
-            adaptador_recycler gr = new adaptador_recycler(this, datos);
-            LinearLayoutManager lln= new LinearLayoutManager(getContext());
-            rv.setLayoutManager(lln);
-            rv.setAdapter(gr);
-        }
-    }
-    }
+}
 
 
 

@@ -19,6 +19,7 @@ public interface ServicioContacto {
 
 
 @POST("Select_catalogo.php") // nombre del php que esta fungiendo como webservices
+
  Call<List<Parametros>> traerdatos();
 
 

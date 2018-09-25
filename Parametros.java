@@ -36,6 +36,7 @@ public class Parametros {
         return Linea;
     }
 
+
     public void setLinea(String linea) {
         Linea = linea;
     }
