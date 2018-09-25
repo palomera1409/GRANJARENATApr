@@ -31,28 +31,71 @@ public class CatalogoFragment extends Fragment {
 
     public List<Parametros> datos;
     ProgressDialog dialog;
-    @BindView(R.id.recycler)
-    RecyclerView rv;
+  private RecyclerView rv;
+View v;
 
 
 
 
 
 
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+
+
+
+        return  inflater.inflate(R.layout.fragment_catalogo, container, false);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+            //dialog = ProgressDialog.show(this,"","Cargando Datos Espere un Minuto");
+            final  String url ="https://penurious-lots.000webhostapp.com/Granjaporcina/Webservice/";
+            Retrofit retrofit = new Retrofit.Builder().baseUrl(url).addConverterFactory(GsonConverterFactory.create()).build();
+
+            ServicioContacto servicioContacto = retrofit.create(ServicioContacto.class);
+
+            Call <List<Parametros>> peticion =  servicioContacto.traerdatos();
+            peticion.enqueue(new Callback<List<Parametros>>() {
+                @Override
+                public void onResponse(Call<List<Parametros>> call, Response<List<Parametros>> response)
+                {
+                    datos = response.body();
+                    llenar_recicler();
+
+
+                }
+
+
+                @Override
+                public void onFailure(Call<List<Parametros>> call, Throwable t)
+                {
+                    Toast.makeText(getContext(),"Entro al onFailure",Toast.LENGTH_LONG).show();
+                }
+
+            });
+
+
+
+
+
+
+
 
 
 
     }
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_catalogo, container, false);
+
+    private void llenar_recicler() {
+
+        adaptador_recycler adaptador_recycler = new adaptador_recycler(getContext(),datos);
+        rv.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rv.setAdapter(adaptador_recycler);
     }
+
 
 
 
@@ -62,64 +105,12 @@ public class CatalogoFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        cargar_datos();
     }
 
 
 
 
-    private void cargar_datos() {
-        //dialog = ProgressDialog.show(this,"","Cargando Datos Espere un Minuto");
-        final  String url ="https://penurious-lots.000webhostapp.com/Granjaporcina/Webservice/";
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(url).addConverterFactory(GsonConverterFactory.create()).build();
 
-        ServicioContacto servicioContacto = retrofit.create(ServicioContacto.class);
-
-        Call <List<Parametros>> peticion =  servicioContacto.traerdatos();
-        peticion.enqueue(new Callback<List<Parametros>>() {
-            @Override
-            public void onResponse(Call<List<Parametros>> call, Response<List<Parametros>> response)
-            {
-                datos = response.body();
-                if (datos!=null)
-                {
-                    //Toast.makeText(getContext(),"si trajo datos",Toast.LENGTH_LONG).show();
-                    llenarRecycler();
-
-
-
-                }
-                else
-                {
-                    Toast.makeText(getContext(),"no trajo datos",Toast.LENGTH_LONG).show();
-                }
-
-
-            }
-
-            private void llenarRecycler()
-            {
-
-            adaptador_recycler  gr = new adaptador_recycler(getContext(),datos);
-                LinearLayoutManager lln= new LinearLayoutManager(getContext());
-                rv.setLayoutManager(lln);
-                rv.setAdapter(gr);
-
-            }
-
-            @Override
-            public void onFailure(Call<List<Parametros>> call, Throwable t)
-            {
-                Toast.makeText(getContext(),"Entro al onFailure",Toast.LENGTH_LONG).show();
-            }
-
-        });
-
-
-
-
-
-    }
 
 
 

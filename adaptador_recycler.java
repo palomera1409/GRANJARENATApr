@@ -33,7 +33,9 @@ class adaptador_recycler  extends RecyclerView.Adapter <adaptador_recycler.ViewH
     @Override
     public adaptador_recycler.ViewHolderParametros onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler,parent,false);
-        return  new ViewHolderParametros(v);
+     ViewHolderParametros ventana = new ViewHolderParametros(v);
+
+        return  ventana ;
     }
 
     @Override
