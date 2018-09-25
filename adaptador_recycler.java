@@ -48,6 +48,7 @@ class adaptador_recycler  extends RecyclerView.Adapter <adaptador_recycler.ViewH
     @Override
     public int getItemCount() {
         return parametros.size();
+
     }
 
     public class ViewHolderParametros extends RecyclerView.ViewHolder {

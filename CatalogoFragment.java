@@ -94,6 +94,7 @@ View v;
         adaptador_recycler adaptador_recycler = new adaptador_recycler(getContext(),datos);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         rv.setAdapter(adaptador_recycler);
+
     }
 
 
