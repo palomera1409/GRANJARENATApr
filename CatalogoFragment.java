@@ -31,8 +31,8 @@ public class CatalogoFragment extends Fragment {
 
     public List<Parametros> datos;
     ProgressDialog dialog;
-  private RecyclerView rv;
-View v;
+  @BindView(R.id.recycler)
+  RecyclerView rv;
 
 
 
@@ -42,17 +42,19 @@ View v;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        ;
+       View v = inflater.inflate(R.layout.fragment_catalogo, container, false);
+        ButterKnife.bind(this,v);
 
 
-
-        return  inflater.inflate(R.layout.fragment_catalogo, container, false);
+        return  v;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-            //dialog = ProgressDialog.show(this,"","Cargando Datos Espere un Minuto");
+            dialog = ProgressDialog.show(getContext(),"","Cargando Datos Espere un Minuto");
             final  String url ="https://penurious-lots.000webhostapp.com/Granjaporcina/Webservice/";
             Retrofit retrofit = new Retrofit.Builder().baseUrl(url).addConverterFactory(GsonConverterFactory.create()).build();
 
@@ -65,7 +67,7 @@ View v;
                 {
                     datos = response.body();
                     llenar_recicler();
-
+                    dialog.dismiss();
 
                 }
 
@@ -73,19 +75,11 @@ View v;
                 @Override
                 public void onFailure(Call<List<Parametros>> call, Throwable t)
                 {
-                    Toast.makeText(getContext(),"Entro al onFailure",Toast.LENGTH_LONG).show();
+                    dialog.dismiss();
+                    Toast.makeText(getContext(),"Error Inesperado Revise su conexión",Toast.LENGTH_LONG).show();
                 }
 
             });
-
-
-
-
-
-
-
-
-
 
     }
 
