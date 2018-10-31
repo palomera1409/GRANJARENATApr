@@ -81,12 +81,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+ // metodo del boton flotante de facebook:
 
     public void facebookintent(View v) {
-        String url = "https://www.facebook.com/La-Granja-de-Renata-1776724069239100/?ref=br_rs";
-        Intent i = new Intent(Intent.ACTION_VIEW);
+        String url = "https://www.facebook.com/La-Granja-de-Renata-1776724069239100/?ref=br_rs"; /* Ruta de la cuenta oficial
+        de facebook de la granja*/
+        Intent i = new Intent(Intent.ACTION_VIEW); // Declaro la intencion para mandar a llamar la aplicaion de facebok
         i.setData(Uri.parse(url));
-        startActivity(i);
+        startActivity(i);// ejecuto la intencion
 
     }
 
@@ -169,16 +171,18 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
+            /*por motivo de que la aplicacion tiene una estructura a base de fragmen necesita retornar un valo para saber a que layout vamos
+            * a mandarlo y  la manera mas adecuada es mediante un case*/
             switch (position) {
-                case 0:
+                case 0:// si el valor a retornar es 0 se abrira el catalogo
 
                     CatalogoFragment catalogoFragment = new CatalogoFragment();
                     return catalogoFragment;
 
-                case 1:
+                case 1:// si el valor retornado es 1 se iniciara el comprar
                     CompraFragment compraFragment = new CompraFragment();
                     return compraFragment;
-                case 2:
+                case 2:// si el valor a retornar es 2 inicia el envio
                     EnvioFragment envioFragment = new EnvioFragment();
                     return envioFragment;
 
@@ -189,6 +193,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
+            //el encargado de retornar el valor  que tomara el switch para ejecutar los leyaut
             // Show 3 total pages.
             return 3;
         }

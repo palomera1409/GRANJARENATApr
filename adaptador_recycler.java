@@ -6,12 +6,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.Image;
+import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +26,10 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.List;
 
+import com.mercadopago.*;
+
+
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -33,22 +39,25 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 
 class adaptador_recycler  extends RecyclerView.Adapter <adaptador_recycler.ViewHolderParametros> implements ItemClickListener {
-
+ // declaramos dos variable una del tipo lista con parametros como valor
+    //y un contexto nuevo
     List<Parametros> parametros;
     Context context;
 
 
     public adaptador_recycler(Context context, List<Parametros> datos)
     {
-        this.parametros = datos;
+        this.parametros = datos;// a la variable parametros le agregamos los datos que es lo que trae el arreglo de  datos en json
 
-        this.context = context;
+        this.context = context; // y el contexto qeu nos tragimos desde el catalogofragmen lo asignamos a este mismo contexto
+
 
     }
 
     @Override
     public adaptador_recycler.ViewHolderParametros onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler,parent,false);
+        // inflamos una variable de
      ViewHolderParametros ventana = new ViewHolderParametros(v);
 
         return  ventana ;
@@ -56,15 +65,17 @@ class adaptador_recycler  extends RecyclerView.Adapter <adaptador_recycler.ViewH
 
     @Override
     public void onBindViewHolder(final adaptador_recycler.ViewHolderParametros holder, int position) {
-        Parametros parametro = parametros.get(position);
+        final Parametros parametro = parametros.get(position);
          holder.raza.setText("Raza: "+parametro.getRaza());
          holder.linea.setText("Linea: "+parametro.getLinea());
          holder.nombre.setText("Nombre: "+parametro.getNombre());
          holder.edad.setText("Edad: "+ parametro.getEdad());
          holder.exitencia.setText("Existencias:"+parametro.getExistencia_de_dosis());
          holder.descripcion.setText("Descripcion: "+parametro.getDescripcion());
+         holder.precio.setText("Precio: "+ parametro.getPrecio());
          parametro.getImagen().replace("<img src=","");
    String imagen="";
+
 
 
 
@@ -93,6 +104,26 @@ class adaptador_recycler  extends RecyclerView.Adapter <adaptador_recycler.ViewH
 
 holder.request.add(imageRequest);
 
+
+
+  holder.comprar.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+
+          if (parametro.getPrecio().equals("300"))
+          {
+   Toast.makeText(context,"preciono 300",Toast.LENGTH_LONG).show();
+          }
+       if (parametro.getPrecio().equals("500"))
+          {
+              Toast.makeText(context,"el valor es de quinientos",Toast.LENGTH_LONG).show();
+          }
+
+
+
+      }
+  });
+
      }
 
     @Override
@@ -106,6 +137,8 @@ holder.request.add(imageRequest);
 
         @BindView(R.id.txtraza)
         TextView raza;
+        @BindView (R.id.comprar)
+        Button comprar;
         @BindView(R.id.txtnlinea)
         TextView linea;
         @BindView(R.id.txtnombre)
@@ -118,7 +151,8 @@ holder.request.add(imageRequest);
         TextView descripcion;
         @BindView(R.id.avatar)
         CircleImageView imgcerdo;
-
+@BindView(R.id.txtprecio)
+        TextView precio;
         RequestQueue request= Volley.newRequestQueue(context);
 
         public ViewHolderParametros(View itemView) {
@@ -129,5 +163,6 @@ holder.request.add(imageRequest);
         }
 
     }
+
 
 }
