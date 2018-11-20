@@ -25,8 +25,9 @@ import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.Volley;
 
 import java.util.List;
+import java.util.Objects;
 
-import com.mercadopago.*;
+
 
 
 
@@ -66,6 +67,8 @@ class adaptador_recycler  extends RecyclerView.Adapter <adaptador_recycler.ViewH
     @Override
     public void onBindViewHolder(final adaptador_recycler.ViewHolderParametros holder, int position) {
         final Parametros parametro = parametros.get(position);
+
+
          holder.raza.setText("Raza: "+parametro.getRaza());
          holder.linea.setText("Linea: "+parametro.getLinea());
          holder.nombre.setText("Nombre: "+parametro.getNombre());
@@ -110,13 +113,21 @@ holder.request.add(imageRequest);
       @Override
       public void onClick(View v) {
 
-          if (parametro.getPrecio().equals("300"))
+          String aux = parametro.getPrecio().toString();
+          Log.e("valor", "el valor es,"+aux.toString() );
+
+          if (aux=="300")
           {
-   Toast.makeText(context,"preciono 300",Toast.LENGTH_LONG).show();
+
+
+              Intent Bmeters = new Intent(context ,CompraFragment.class);
+              context.startActivity(Bmeters);
+
           }
-       if (parametro.getPrecio().equals("500"))
+       if (Objects.equals(parametro.getPrecio().toString(), "500"))
           {
               Toast.makeText(context,"el valor es de quinientos",Toast.LENGTH_LONG).show();
+              Log.d("de 500", "entro al 500");
           }
 
 
@@ -151,15 +162,14 @@ holder.request.add(imageRequest);
         TextView descripcion;
         @BindView(R.id.avatar)
         CircleImageView imgcerdo;
-@BindView(R.id.txtprecio)
+        @BindView(R.id.txtprecio)
         TextView precio;
         RequestQueue request= Volley.newRequestQueue(context);
 
-        public ViewHolderParametros(View itemView) {
+        public ViewHolderParametros(View itemView)
+        {
             super(itemView);
             ButterKnife.bind(this, itemView);
-
-
         }
 
     }

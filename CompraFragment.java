@@ -1,7 +1,6 @@
 package isic.tala.tec.granjarenata;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -27,14 +26,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.mercadopago.android.px.core.MercadoPagoCheckout;
 
 import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+
 
 
 public class CompraFragment extends Fragment implements Response.Listener<JSONObject>,Response.ErrorListener {
@@ -47,12 +44,12 @@ public class CompraFragment extends Fragment implements Response.Listener<JSONOb
     EditText receptor;
     @BindView(R.id.spinner_Estado)
     Spinner estado;
-    @BindView(R.id.spinner_sucursal)
-    Spinner sucursal;
+    @BindView(R.id.sucursal)
+    EditText sucursal;
     @BindView(R.id.btn_Comprar)
-    Button comparar;
+    Button comprar;
     @BindView(R.id.number_cantidad)
-    TextView cantidad;
+    EditText cantidad;
 
     ProgressDialog dialog;
     RequestQueue requet;
@@ -68,6 +65,7 @@ public class CompraFragment extends Fragment implements Response.Listener<JSONOb
         ButterKnife.bind(this, view);
 
 
+
         // Inflate the layout for this fragment
 
      //   final MercadoPagoCheckout checkout = new MercadoPagoCheckout.Builder
@@ -80,27 +78,16 @@ public class CompraFragment extends Fragment implements Response.Listener<JSONOb
         estado.setAdapter(adapter);
 
         requet = Volley.newRequestQueue(getContext());
-        comparar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String url = "https://www.mercadopago.com/mlm/checkout/start?pref_id=361722166-13a3fc66-36b9-41fc-a193-3e54c19d8d4d";
 
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
-
-
-
-                            }
-        });
-
-
-
-
-
+         comprar.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+           //  compra_de_semen();
+             Toast.makeText(getContext(),"prueba de precio", Toast.LENGTH_LONG);
+             }
+         });
 
         return view;
-
 
 
 
@@ -108,7 +95,43 @@ public class CompraFragment extends Fragment implements Response.Listener<JSONOb
      }
 
 
+    public void  compra_de_semen()
+    {
 
+
+        if (cantidad.getText().equals("1")) {
+
+            Log.d("comparacion", "compra_de_semen entro al primer if");
+            String url = "https://www.mercadopago.com/mlm/checkout/start?pref_id=361722166-13a3fc66-36b9-41fc-a193-3e54c19d8d4d";
+
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            startActivity(i);
+
+        }
+
+        if (cantidad.getText().equals("2")) {
+            Log.d("comparacion", "compra_de_semen entro al segundo if");
+            String url = "https://www.mercadopago.com/mlm/checkout/start?pref_id=361722166-2f8318cc-93bf-44c7-a342-4228f61ae35e";
+
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            startActivity(i);
+        }
+        if (cantidad.getText().equals("3")) {
+            Log.d("comparacion", "compra_de_semen entro al tercer if");
+            String url = "https://www.mercadopago.com/mlm/checkout/start?pref_id=361722166-62bb2c20-0a98-419d-ab3d-ad7b63375d15";
+
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            startActivity(i);
+
+        }
+
+
+
+
+    }
     private void Cargar_webservice()
 
     {
@@ -165,3 +188,4 @@ public class CompraFragment extends Fragment implements Response.Listener<JSONOb
 
 
 }
+

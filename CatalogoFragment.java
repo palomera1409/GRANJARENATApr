@@ -65,7 +65,7 @@ public class CatalogoFragment extends Fragment {
 
             dialog = ProgressDialog.show(getContext(),"","Cargando Datos Espere un Momento"); // lo que tendra el
         // mensaje tipo progres
-            final  String url ="https://penurious-lots.000webhostapp.com/Granjaporcina/Webservice/";// la url del webservice de donde se traera
+            final  String url ="https://www.lagranjaderenata.com/Webservice/";// la url del webservice de donde se traera
         //la cadena tipo json con los datos
             Retrofit retrofit = new Retrofit.Builder().baseUrl(url).addConverterFactory(GsonConverterFactory.create()).build();/*
           Se instancea el metodo de retrofit y se agrega un converson de json a objetos*/
